@@ -31,8 +31,18 @@ public class App
         Student s2 = new Student(s1);
         s2.setCaoNumber(22222);
 
+        Student s3 = new Student(9999,"12/11/2001","yeaBoi","mygmail@email.ie");
+
         System.out.println(s1);
         System.out.println(s2);
+
+        studentManager.addStudent(s3);
+
+        System.out.println("s3: " + s3);
+
+        studentManager.removeStudent(s3.getCaoNumber());
+
+        System.out.println(studentManager.toString());
 
 
         // load courses
