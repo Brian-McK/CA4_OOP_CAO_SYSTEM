@@ -27,26 +27,16 @@ public class App
         StudentManager studentManager = new StudentManager();
 
         Student s1 = new Student(1234,"05/12/1991","hello","myemail@email.ie");
-
         Student s2 = new Student(s1);
         s2.setCaoNumber(22222);
 
         Student s3 = new Student(9999,"12/11/2001","yeaBoi","mygmail@email.ie");
 
-        System.out.println(s1);
-        System.out.println(s2);
-
-        studentManager.addStudent(s3);
-
-        System.out.println("s3: " + s3);
-
-        studentManager.removeStudent(s3.getCaoNumber());
-
-        System.out.println(studentManager.toString());
-
 
         // load courses
         CourseManager courseManager= new CourseManager();
+
+        System.out.println(courseManager.getAllCourses());
 
         // load manager to provide functionality to allow a student
         // to login and add/update their course selections
@@ -73,3 +63,5 @@ public class App
 
     }
 }
+
+// TODO: 13/02/2021 - Create methods for adding data from a file

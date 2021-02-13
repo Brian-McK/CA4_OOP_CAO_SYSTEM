@@ -8,10 +8,6 @@ import java.util.Map;
 
 public class StudentManager {
 
-    // Store all students in data structure
-    // make it private
-    // prob use hashmap
-
     private final Map<Integer, Student> applicants = new HashMap<>();
 
     public StudentManager() {
