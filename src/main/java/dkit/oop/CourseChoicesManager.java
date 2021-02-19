@@ -22,7 +22,12 @@ public class CourseChoicesManager {
 
     // Store all the Course details -  fast access
 
+    // convert back and forth map to list etc...
+
     // caoNumber, course selection list - for fast access
+    // in order of choices
+
+    private final Map<String, Course> studentsCourseChoices = new HashMap<>();
 
 
     // CourseChoicesManager DEPENDS on both the StudentManager and CourseManager to access
@@ -35,21 +40,52 @@ public class CourseChoicesManager {
         this.studentManager = studentManager;
         this.courseManager = courseManager;
 
+        // add in dummy courses
+        Course c1 = new Course("COU0001","8","Computing","DKIT");
+        Course c2 = new Course("COU0043","6","Business","DKIT");
+        Course c3 = new Course("COU0111","7","French","Newry IT");
+        Course c4 = new Course("COU0022","6","Music","Athlone IT");
+        Course c5 = new Course("COU1044","8","Sport","UCD");
+
+//        // add in course choices
+//
+//        List<Course>
+
+
     }
 
-//    public Student getStudentDetails() {
+    public Student getStudentDetails(int caoNumber) {
+
+        if(studentManager.getStudent(caoNumber) != null)
+        {
+            return studentManager.getStudent(caoNumber);
+        }
+        else {
+            return null;
+        }
+    }
+
+    public Course getCourseDetails(String courseId) {
+        if(courseManager.getCourse(courseId) != null)
+        {
+            return courseManager.getCourse(courseId);
+        }
+        else {
+            return null;
+        }
+    }
+
+//    public List<Course> getStudentChoices(int caoNumber) {
+//        return studentsCourseChoices.get(caoNumber);
 //    }
-//
-//    public getCourseDetails() {
-//    }
-//
-//    public  getStudentChoices() {
-//    }
+
+    // pass in cao number and what they want to change
 //
 //    void updateChoices() {
 //    }
 //
 //    public  getAllCourses() {
+//    call from course class
 //    }
 //
 //    boolean login() {

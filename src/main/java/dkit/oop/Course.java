@@ -52,10 +52,12 @@ public class Course {
     public void setTitle(String title) { this.title = title; }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "Course{" +
                 "courseId='" + courseId + '\'' +
                 ", level='" + level + '\'' +
+                ", title='" + title + '\'' +
                 ", institution='" + institution + '\'' +
                 '}';
     }

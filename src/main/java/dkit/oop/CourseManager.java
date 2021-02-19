@@ -1,6 +1,5 @@
 package dkit.oop;
 
-
 import java.util.*;
 
 /**
@@ -35,20 +34,23 @@ public class CourseManager {
 
     }
 
-    public Course getCourse(String courseId) {
-        return courses.containsKey(courseId) ? new Course(courses.get(courseId)) : null;
-    }
+    // in main check if null car not found else do something
 
-//    linked list or arraylist???
+    public Course getCourse(String courseId) {
+        Course course = courses.get(courseId);
+
+        return course != null ? new Course(course) : null;
+    }
 
     public List<Course> getAllCourses() {
 
-        List<Course> allCourses = new LinkedList<>();
+        List<Course> allCourses = new ArrayList<>();
+        Set<String> keySet = courses.keySet();
 
-        for (String courseKey: courses.keySet()) {
-            allCourses.add(courses.get(courseKey));
+        for (String courseId: keySet) {
+            Course course = courses.get(courseId);
+            allCourses.add(new Course(course));
         }
-
         return allCourses;
     }
 

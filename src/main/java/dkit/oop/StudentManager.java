@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class StudentManager {
 
-    private final Map<Integer, Student> applicants = new HashMap<>();
+    private final Map<Integer, Student> students = new HashMap<>();
 
     public StudentManager() {
         // Hardcode some values to get started
@@ -18,17 +18,19 @@ public class StudentManager {
         Student s3 = new Student(4322,"26/04/1995","howsThings","student3@gmail.ie");
         Student s4 = new Student(5543,"09/12/1993","grandYourself","student4@gmail.ie");
         Student s5 = new Student(9121,"03/06/1999","yeaFineThanks","student5@gmail.ie");
-        applicants.put(1234,s1);
-        applicants.put(6398,s2);
-        applicants.put(4322,s3);
-        applicants.put(5543,s4);
-        applicants.put(9121,s5);
+        students.put(1234,s1);
+        students.put(6398,s2);
+        students.put(4322,s3);
+        students.put(5543,s4);
+        students.put(9121,s5);
 
         // later, load from text file "students.dat" and populate studentsMap
     }
 
+    // GET ALL STUDENTS METHOD???
+
     public Student getStudent(int caoNumber) {
-        return applicants.containsKey(caoNumber) ? new Student(applicants.get(caoNumber)) : null;
+        return students.containsKey(caoNumber) ? new Student(students.get(caoNumber)) : null;
     }
 
     public void addStudent(Student stud) {
@@ -36,12 +38,12 @@ public class StudentManager {
         if(stud != null)
         {
             Student student = new Student(stud);
-            applicants.put(student.getCaoNumber(),student);
+            students.put(student.getCaoNumber(),student);
         }
     }
 
     public void removeStudent(int caoNumber) {
-        applicants.remove(caoNumber);
+        students.remove(caoNumber);
     }
 
 //    isRegistered( caoNumber)
@@ -51,7 +53,7 @@ public class StudentManager {
     public String toString()
     {
         return "StudentManager{" +
-                "applicants=" + applicants +
+                "students=" + students +
                 '}';
     }
 }
