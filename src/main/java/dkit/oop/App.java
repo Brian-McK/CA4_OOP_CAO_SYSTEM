@@ -66,6 +66,13 @@ public class App
         System.out.println(courseChoicesManager.getCourseDetails("COU0022"));
         System.out.println("*** COURSE CHOICE MANAGER GET COURSE DETAILS END ***");
 
+        System.out.println("*** COURSE CHOICE MANAGER GET STUDENT CHOICES ***");
+        System.out.println(courseChoicesManager.getStudentChoices(6398));
+        System.out.println("*** COURSE CHOICE MANAGER GET STUDENT CHOICES END ***");
+
+        System.out.println("*** COURSE CHOICE MANAGER GET ALL COURSES ***");
+        System.out.println(courseChoicesManager.getAllCourses());
+        System.out.println("*** COURSE CHOICE MANAGER GET ALL COURSES END ***");
 
         // display a menu to do things
         // manual testing of mgr public interface

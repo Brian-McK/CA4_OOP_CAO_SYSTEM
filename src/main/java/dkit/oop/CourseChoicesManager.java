@@ -21,14 +21,14 @@ public class CourseChoicesManager {
     private CourseManager courseManager;
 
     // Store all the Course details -  fast access
+    private final Map<String, Course> allCourses = new HashMap<>();
 
-    // convert back and forth map to list etc...
+    //  TODO - convert back and forth map to list etc...
 
     // caoNumber, course selection list - for fast access
     // in order of choices
 
-    private final Map<String, Course> studentsCourseChoices = new HashMap<>();
-
+    private final Map<Integer, List<Course>> studentsCourseChoices = new HashMap<>();
 
     // CourseChoicesManager DEPENDS on both the StudentManager and CourseManager to access
     // student details and course details.  So, we receive a reference to each via
@@ -40,6 +40,8 @@ public class CourseChoicesManager {
         this.studentManager = studentManager;
         this.courseManager = courseManager;
 
+        coursesListToMap();
+
         // add in dummy courses
         Course c1 = new Course("COU0001","8","Computing","DKIT");
         Course c2 = new Course("COU0043","6","Business","DKIT");
@@ -48,10 +50,25 @@ public class CourseChoicesManager {
         Course c5 = new Course("COU1044","8","Sport","UCD");
 
 //        // add in course choices
-//
-//        List<Course>
 
+        List<Course> courseChoices = new ArrayList<>();
+        courseChoices.add(c1);
+        courseChoices.add(c2);
+        courseChoices.add(c3);
+        courseChoices.add(c4);
+        courseChoices.add(c5);
 
+        studentsCourseChoices.put(1234,courseChoices);
+
+        courseChoices = new ArrayList<>();
+
+        courseChoices.add(c5);
+        courseChoices.add(c4);
+        courseChoices.add(c3);
+        courseChoices.add(c2);
+        courseChoices.add(c1);
+
+        studentsCourseChoices.put(6398,courseChoices);
     }
 
     public Student getStudentDetails(int caoNumber) {
@@ -75,21 +92,38 @@ public class CourseChoicesManager {
         }
     }
 
-//    public List<Course> getStudentChoices(int caoNumber) {
-//        return studentsCourseChoices.get(caoNumber);
-//    }
+    public List<Course> getStudentChoices(int caoNumber) {
+        return studentsCourseChoices.get(caoNumber);
+    }
+
+    public void coursesListToMap()
+    {
+        List<Course> courses = getAllCourses();
+
+        for(Course course : courses)
+        {
+            allCourses.put(course.getCourseId(),course);
+        }
+    }
 
     // pass in cao number and what they want to change
-//
-//    void updateChoices() {
-//    }
-//
-//    public  getAllCourses() {
-//    call from course class
-//    }
-//
-//    boolean login() {
-//    }
 
-
+//    void updateChoice(int caoNumber, List<String> courseChoices) {
+//
+//    }
+//
+    public List<Course> getAllCourses() {
+        return courseManager.getAllCourses();
+    }
+//
+//    boolean login(int caoNumber, String dob, String password) {
+//
+//
+//    }
 }
+
+
+
+
+
+// TODO - WRITE TO FILE COURSE CHOICES MANAGER
