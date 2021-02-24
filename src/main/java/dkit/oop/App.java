@@ -1,5 +1,6 @@
 package dkit.oop;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -54,15 +55,35 @@ public class App
         while (selectedOption != MenuOptions.QUIT)
         {
             try{
-
                 // print the menu
                 // get users selection
                 // act on the selection
                 // exit on quit
                 printMenu();
+                selectedOption = MenuOptions.values()[Integer.parseInt(scanner.nextLine().trim())];
+
+                switch (selectedOption)
+                {
+                    case DISPLAY_COURSE:
+//                        displayCourse();
+                    case DISPLAY_ALL_COURSES:
+//                        displayAllCourses();
+                    case DISPLAY_CURRENT_CHOICES:
+//                        displayCurrentCourseChoices();
+                    case UPDATE_CHOICES:
+//                        updateCourseChoices();
+                        break;
+                    case QUIT:
+                        break;
+                    default:
+                        System.out.println("Invalid entry, try again");
+                }
+            }
+            catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e)
+            {
+                System.out.println("Invalid entry, try again");
             }
         }
-
 
 //        if ( mgr.login(22224444, "xxxx","bbbb"))
 //        {
@@ -83,7 +104,7 @@ public class App
         System.out.println("\nEnter your choice:");
         System.out.println("\t1) Display a course:");
         System.out.println("\t2) Display all courses:");
-        System.out.println("\t3) Display current current course choices:");
+        System.out.println("\t3) Display current course choices:");
         System.out.println("\t4) Update current course choices:");
         System.out.println("\t5) QUIT");
 
