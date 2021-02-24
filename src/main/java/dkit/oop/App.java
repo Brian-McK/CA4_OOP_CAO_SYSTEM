@@ -1,7 +1,5 @@
 package dkit.oop;
 
-import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 /*
@@ -25,44 +23,43 @@ public class App
 
     private void start() {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
 
-        // load students
         StudentManager studentManager = new StudentManager();
-
-//        System.out.println(studentManager);
-
-        // load courses
         CourseManager courseManager= new CourseManager();
-
-        System.out.println(courseManager);
-
-        // load manager to provide functionality to allow a student
-        // to login and add/update their course selections
-        // This CourseChoicesManager component depends on the
-        // StudentManager and the CourseManager,
-        // so we 'inject' or pass-in these objects.
-        //
         CourseChoicesManager courseChoicesManager = new CourseChoicesManager(studentManager, courseManager);
 
-        // display a menu to do things
-        // manual testing of mgr public interface
+        System.out.println("Welcome to the CAO, Enter details to login:");
 
-        System.out.println("Welcome to the CAO");
+        System.out.println("Enter CAO Number: ");
+        int caoNumber = scan.nextInt();
+        scan.nextLine();
 
-        MenuOptions selectedOption = MenuOptions.CONTINUE;
+        System.out.println("Enter date of birth: ");
+        String dateOfBirth = scan.nextLine();
 
-        while (selectedOption != MenuOptions.QUIT)
+        System.out.println("Enter Password: ");
+        String password = scan.nextLine();
+
+        boolean isValidLoginStudent = studentManager.validLoginStudent(caoNumber,dateOfBirth,password);
+
+        if(!isValidLoginStudent)
+        {
+            System.out.println("Try again");
+        }
+        else {
+            System.out.println("Congrats your logged in");
+        }
+
+        // student menu
+        StudentMenuOptions selectedOptionStudent = StudentMenuOptions.CONTINUE;
+        while (selectedOptionStudent != StudentMenuOptions.QUIT)
         {
             try{
-                // print the menu
-                // get users selection
-                // act on the selection
-                // exit on quit
-                printMenu();
-                selectedOption = MenuOptions.values()[Integer.parseInt(scanner.nextLine().trim())];
+                printMenuStudent();
+                selectedOptionStudent = StudentMenuOptions.values()[Integer.parseInt(scan.nextLine().trim())];
 
-                switch (selectedOption)
+                switch (selectedOptionStudent)
                 {
                     case DISPLAY_COURSE:
 //                        displayCourse();
@@ -99,7 +96,7 @@ public class App
 
     }
 
-    private static void printMenu()
+    private static void printMenuStudent()
     {
         System.out.println("\nEnter your choice:");
         System.out.println("\t1) Display a course:");
@@ -111,5 +108,3 @@ public class App
         System.out.println("\nYOU SELECTED --->");
     }
 }
-
-// TODO: 13/02/2021 - Create methods for adding data from a file

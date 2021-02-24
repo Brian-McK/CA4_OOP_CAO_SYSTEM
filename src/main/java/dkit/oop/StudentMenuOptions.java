@@ -1,6 +1,6 @@
 package dkit.oop;
 
-public enum MenuOptions
+public enum StudentMenuOptions
 {
     CONTINUE, DISPLAY_COURSE, DISPLAY_ALL_COURSES, DISPLAY_CURRENT_CHOICES, UPDATE_CHOICES, QUIT;
 }

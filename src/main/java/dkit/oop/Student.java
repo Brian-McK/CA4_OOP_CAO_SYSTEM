@@ -29,6 +29,14 @@ public class Student {
         this.email = email;
     }
 
+    public Student(int caoNumber, String dateOfBirth, String password)
+    {
+        this.caoNumber = caoNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.password = password;
+        this.email = null;
+    }
+
     //public boolean verifyLoginCredentials( yyy-mm-dd, password);
 
     public int getCaoNumber() {
