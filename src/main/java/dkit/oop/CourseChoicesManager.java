@@ -23,8 +23,6 @@ public class CourseChoicesManager {
     // Store all the Course details -  fast access
     private final Map<String, Course> allCourses = new HashMap<>();
 
-    //  TODO - convert back and forth map to list etc...
-
     // caoNumber, course selection list - for fast access
     // in order of choices
 
@@ -48,8 +46,6 @@ public class CourseChoicesManager {
         Course c3 = new Course("COU0111","7","French","Newry IT");
         Course c4 = new Course("COU0022","6","Music","Athlone IT");
         Course c5 = new Course("COU1044","8","Sport","UCD");
-
-//        // add in course choices
 
         List<Course> courseChoices = new ArrayList<>();
         courseChoices.add(c1);
@@ -108,6 +104,7 @@ public class CourseChoicesManager {
 
     // pass in cao number and what they want to change
 
+    // TODO - UPDATE CHOICE
 //    void updateChoice(int caoNumber, List<String> courseChoices) {
 //
 //    }
@@ -115,6 +112,8 @@ public class CourseChoicesManager {
     public List<Course> getAllCourses() {
         return courseManager.getAllCourses();
     }
+
+    // TODO - BOOLEAN LOGIN
 //
 //    boolean login(int caoNumber, String dob, String password) {
 //

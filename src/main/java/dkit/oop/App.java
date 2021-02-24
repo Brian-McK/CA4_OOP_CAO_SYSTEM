@@ -26,29 +26,10 @@ public class App
         // load students
         StudentManager studentManager = new StudentManager();
 
-        Student s1 = new Student(1234,"05/12/1991","hello","myemail@email.ie");
-        Student s2 = new Student(s1);
-        s2.setCaoNumber(22222);
-
-        Student s3 = new Student(9999,"12/11/2001","yeaBoi","mygmail@email.ie");
-
-
-        System.out.println("*** GET STUDENT TEST ***");
-        System.out.println(studentManager.getStudent(6398));
-        System.out.println("*** GET STUDENT TEST END ***");
-
-
+        System.out.println(studentManager);
 
         // load courses
         CourseManager courseManager= new CourseManager();
-
-        System.out.println("*** GET COURSE TEST ***");
-        System.out.println(courseManager.getCourse("COU0022"));
-        System.out.println("*** GET COURSE TEST END ***");
-
-        System.out.println("*** GET ALL COURSES TEST ***");
-        System.out.println(courseManager.getAllCourses());
-        System.out.println("*** GET ALL COURSES TEST END ***");
 
         // load manager to provide functionality to allow a student
         // to login and add/update their course selections
@@ -58,26 +39,10 @@ public class App
         //
         CourseChoicesManager courseChoicesManager = new CourseChoicesManager(studentManager, courseManager);
 
-        System.out.println("*** COURSE CHOICE MANAGER GET STUDENT ***");
-        System.out.println(courseChoicesManager.getStudentDetails(1234));
-        System.out.println("*** COURSE CHOICE MANAGER GET STUDENT END ***");
-
-        System.out.println("*** COURSE CHOICE MANAGER GET COURSE DETAILS ***");
-        System.out.println(courseChoicesManager.getCourseDetails("COU0022"));
-        System.out.println("*** COURSE CHOICE MANAGER GET COURSE DETAILS END ***");
-
-        System.out.println("*** COURSE CHOICE MANAGER GET STUDENT CHOICES ***");
-        System.out.println(courseChoicesManager.getStudentChoices(6398));
-        System.out.println("*** COURSE CHOICE MANAGER GET STUDENT CHOICES END ***");
-
-        System.out.println("*** COURSE CHOICE MANAGER GET ALL COURSES ***");
-        System.out.println(courseChoicesManager.getAllCourses());
-        System.out.println("*** COURSE CHOICE MANAGER GET ALL COURSES END ***");
-
         // display a menu to do things
         // manual testing of mgr public interface
 
-//        if ( mgr.login(22224444, "xxxx","bbbb") )
+//        if ( mgr.login(22224444, "xxxx","bbbb"))
 //        {
 //            Student student = mgr.getStudentDetails(22224444);
 //
