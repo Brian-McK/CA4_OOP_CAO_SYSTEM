@@ -26,10 +26,12 @@ public class App
         // load students
         StudentManager studentManager = new StudentManager();
 
-        System.out.println(studentManager);
+//        System.out.println(studentManager);
 
         // load courses
         CourseManager courseManager= new CourseManager();
+
+        System.out.println(courseManager);
 
         // load manager to provide functionality to allow a student
         // to login and add/update their course selections

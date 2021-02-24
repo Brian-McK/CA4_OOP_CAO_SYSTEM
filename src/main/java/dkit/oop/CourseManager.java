@@ -1,6 +1,13 @@
 package dkit.oop;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
+
+/*
+ * Brian McKenna
+ * SD2B
+ */
 
 /**
  * CoursesManager
@@ -20,17 +27,43 @@ public class CourseManager {
         // Hardcode some values to get started
         // load from text file "courses.dat" and populate coursesMap
 
-        Course c1 = new Course("COU0001","8","Computing","DKIT");
-        Course c2 = new Course("COU0043","6","Business","DKIT");
-        Course c3 = new Course("COU0111","7","French","Newry IT");
-        Course c4 = new Course("COU0022","6","Music","Athlone IT");
-        Course c5 = new Course("COU1044","8","Sport","UCD");
+//        Course c1 = new Course("COU0001","8","Computing","DKIT");
+//        Course c2 = new Course("COU0043","6","Business","DKIT");
+//        Course c3 = new Course("COU0111","7","French","Newry IT");
+//        Course c4 = new Course("COU0022","6","Music","Athlone IT");
+//        Course c5 = new Course("COU1044","8","Sport","UCD");
+//
+//        courses.put("COU0001",c1);
+//        courses.put("COU0043",c2);
+//        courses.put("COU0111",c3);
+//        courses.put("COU0022",c4);
+//        courses.put("COU1044",c5);
 
-        courses.put("COU0001",c1);
-        courses.put("COU0043",c2);
-        courses.put("COU0111",c3);
-        courses.put("COU0022",c4);
-        courses.put("COU1044",c5);
+        File inputFile = new File("courses.dat");
+
+        try (Scanner scan = new Scanner(inputFile))
+        {
+            while (scan.hasNextLine())
+            {
+                String line = scan.nextLine();
+                String [] data = line.split(",");
+
+                String courseId = data[0];
+                String level = data[1];
+                String title = data[2];
+                String institution = data[3];
+
+                Course course = new Course(courseId,level,title,institution);
+                courses.put(courseId,course);
+            }
+
+        } catch ( FileNotFoundException exception)
+        {
+            System.out.println("FileNotFoundException caught." + exception);
+        } catch (InputMismatchException exception)
+        {
+            System.out.println("InputMismatchException caught." + exception);
+        }
 
     }
 
@@ -69,8 +102,15 @@ public class CourseManager {
 
     // editCourse(courseId);       // not required for this iteration
 
-}
 
+    @Override
+    public String toString()
+    {
+        return "CourseManager{" +
+                "courses=" + courses +
+                '}';
+    }
+}
 // TODO - WRITE TO FILE COURSE MANAGER
 
 
