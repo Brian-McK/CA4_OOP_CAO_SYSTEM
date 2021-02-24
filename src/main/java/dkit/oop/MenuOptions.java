@@ -1,0 +1,6 @@
+package dkit.oop;
+
+public enum MenuOptions
+{
+    CONTINUE, DISPLAY_COURSE, DISPLAY_ALL_COURSES, DISPLAY_CURRENT_CHOICES, UPDATE_CHOICES, QUIT;
+}

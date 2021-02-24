@@ -1,6 +1,7 @@
 package dkit.oop;
 
 import java.util.List;
+import java.util.Scanner;
 
 /*
 * Brian McKenna
@@ -23,6 +24,8 @@ public class App
 
     private void start() {
 
+        Scanner scanner = new Scanner(System.in);
+
         // load students
         StudentManager studentManager = new StudentManager();
 
@@ -44,6 +47,23 @@ public class App
         // display a menu to do things
         // manual testing of mgr public interface
 
+        System.out.println("Welcome to the CAO");
+
+        MenuOptions selectedOption = MenuOptions.CONTINUE;
+
+        while (selectedOption != MenuOptions.QUIT)
+        {
+            try{
+
+                // print the menu
+                // get users selection
+                // act on the selection
+                // exit on quit
+                printMenu();
+            }
+        }
+
+
 //        if ( mgr.login(22224444, "xxxx","bbbb"))
 //        {
 //            Student student = mgr.getStudentDetails(22224444);
@@ -56,6 +76,18 @@ public class App
 
         //mgr.saveToFile();
 
+    }
+
+    private static void printMenu()
+    {
+        System.out.println("\nEnter your choice:");
+        System.out.println("\t1) Display a course:");
+        System.out.println("\t2) Display all courses:");
+        System.out.println("\t3) Display current current course choices:");
+        System.out.println("\t4) Update current course choices:");
+        System.out.println("\t5) QUIT");
+
+        System.out.println("\nYOU SELECTED --->");
     }
 }
 
