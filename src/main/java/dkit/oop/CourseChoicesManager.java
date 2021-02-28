@@ -105,13 +105,12 @@ public class CourseChoicesManager {
         }
     }
 
-    // pass in cao number and what they want to change
-
     // TODO - UPDATE CHOICE
-//    void updateChoice(int caoNumber, List<String> courseChoices) {
-//
-//    }
-//
+    public void updateChoice(int caoNumber, List<Course> updatedChoicesList) {
+        studentsCourseChoices.get(caoNumber).clear();
+        studentsCourseChoices.get(caoNumber).addAll(updatedChoicesList);
+    }
+
     public List<Course> getAllCourses() {
         return courseManager.getAllCourses();
     }
