@@ -10,6 +10,8 @@ package dkit.oop;
 //
 // Clone all received and returned objects - encapsulation
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 public class CourseChoicesManager {
@@ -40,31 +42,32 @@ public class CourseChoicesManager {
 
         coursesListToMap();
 
-        // add in dummy courses
-        Course c1 = new Course("COU0001","8","Computing","DKIT");
-        Course c2 = new Course("COU0043","6","Business","DKIT");
-        Course c3 = new Course("COU0111","7","French","Newry IT");
-        Course c4 = new Course("COU0022","6","Music","Athlone IT");
-        Course c5 = new Course("COU1044","8","Sport","UCD");
+        File inputFile = new File("choices.dat");
 
-        List<Course> courseChoices = new ArrayList<>();
-        courseChoices.add(c1);
-        courseChoices.add(c2);
-        courseChoices.add(c3);
-        courseChoices.add(c4);
-        courseChoices.add(c5);
+        try (Scanner scan = new Scanner(inputFile))
+        {
+            while (scan.hasNextLine())
+            {
+                String line = scan.nextLine();
+                String [] data = line.split(",");
 
-        studentsCourseChoices.put(1234,courseChoices);
+                int caoNumber = Integer.parseInt(data[0]);
+                List <Course> courseChoicesList = new ArrayList<>();
+                for (int i = 1; i < data.length; i++)
+                {
+                    Course course = new Course(getCourseDetails(data[i]));
+                    courseChoicesList.add(course);
+                }
+                studentsCourseChoices.put(caoNumber,courseChoicesList);
+            }
 
-        courseChoices = new ArrayList<>();
-
-        courseChoices.add(c5);
-        courseChoices.add(c4);
-        courseChoices.add(c3);
-        courseChoices.add(c2);
-        courseChoices.add(c1);
-
-        studentsCourseChoices.put(6398,courseChoices);
+        } catch ( FileNotFoundException exception)
+        {
+            System.out.println("FileNotFoundException caught." + exception);
+        } catch (InputMismatchException exception)
+        {
+            System.out.println("InputMismatchException caught." + exception);
+        }
     }
 
     public Student getStudentDetails(int caoNumber) {
@@ -113,16 +116,37 @@ public class CourseChoicesManager {
         return courseManager.getAllCourses();
     }
 
-    // TODO - BOOLEAN LOGIN
-//
-//    boolean login(int caoNumber, String dob, String password) {
-//
-//
-//    }
+    public boolean isRegistered(int caoNumber)
+    {
+        boolean isRegisteredStudent = false;
+
+        if(getStudentDetails(caoNumber) != null)
+        {
+            isRegisteredStudent = true;
+        }
+        return isRegisteredStudent;
+    }
+
+    public boolean validLoginStudent(int caoNumber, String dateOfBirth, String password)
+    {
+        // 1. check caoNumber exists by using is registered method above
+        // 2. create a temp new student
+        // 2. check their dateOfBirth & password matches the temp students
+        boolean isValidLoginStudent = false;
+
+        if (isRegistered(caoNumber))
+        {
+            Student tempStudent = new Student(getStudentDetails(caoNumber));
+
+            System.out.println(tempStudent);
+
+            if(tempStudent.getDayOfBirth().equals(dateOfBirth) && tempStudent.getPassword().equals(password))
+            {
+                isValidLoginStudent = true;
+            }
+        }
+        return isValidLoginStudent;
+    }
 }
-
-
-
-
 
 // TODO - WRITE TO FILE COURSE CHOICES MANAGER

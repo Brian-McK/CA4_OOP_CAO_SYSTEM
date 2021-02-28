@@ -60,18 +60,6 @@ public class StudentManager {
         students.remove(caoNumber);
     }
 
-//    public boolean isRegistered(int caoNumber)
-//    {
-//
-//    }
-
-    // check if student is valid for login
-
-//    public boolean validLoginStudent(int caoNumber, String dateOfBirth, String password)
-//    {
-//
-//    }
-
     @Override
     public String toString()
     {
