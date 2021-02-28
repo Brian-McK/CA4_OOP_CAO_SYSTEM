@@ -17,6 +17,16 @@ import java.util.Scanner;
  */
 public class App 
 {
+    private static final String DATE_REGEX = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$";
+    private static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+    // ^                # start-of-string
+    //(?=.*[0-9])       # a digit must occur at least once
+    //(?=.*[a-z])       # a lower case letter must occur at least once
+    //(?=.*[A-Z])       # an upper case letter must occur at least once
+    //(?=.*[@#$%^&+=])  # a special character must occur at least once
+    //(?=\S+$)          # no whitespace allowed in the entire string
+    //.{8,}             # anything, at least eight places though
+    //$                 # end-of-string
     private static final int MAX_NUM_COURSE_CHOICES = 10;
 
     public static void main(String[] args )
@@ -33,29 +43,62 @@ public class App
         CourseManager courseManager= new CourseManager();
         CourseChoicesManager courseChoicesManager = new CourseChoicesManager(studentManager, courseManager);
 
-        //TODO - VALIDATE
-        System.out.println("Welcome to the CAO, Login as Student (1) or Admin (2): ");
-        int userChoice = scan.nextInt();
-        scan.nextLine();
+        int userChoice;
+
+        do {
+            System.out.println("Welcome to the CAO, Login as Student (1) or Admin (2): ");
+
+            while (!scan.hasNextInt())
+            {
+                String input = scan.next();
+                System.out.printf("%s is not a valid number.\n", input);
+            }
+            userChoice = scan.nextInt();
+
+        } while (userChoice < 1 || userChoice > 2);
 
         if(userChoice == 1)
         {
             // do student things
             System.out.println("Welcome student, Enter details to login:");
 
-            //TODO - VALIDATE
             System.out.println("Enter CAO Number: ");
-//        int caoNumber = scan.nextInt();
-//        scan.nextLine();
-            int caoNumber = 21885454;
+            while (!scan.hasNextInt())
+            {
+                System.out.println("Must be a CAO Number, no letters: ");
+                scan.next();
+            }
+            int caoNumber = scan.nextInt();
+            scan.nextLine();
+            System.out.println("CAO NUMBER: " + caoNumber);
 
-            System.out.println("Enter date of birth: ");
-//        String dateOfBirth = scan.nextLine();
-            String dateOfBirth = "1994-10-29";
+//          int caoNumber = 21885454;
+
+            System.out.println("Enter date of birth (yyyy-mm-dd): ");
+            String dateOfBirth = scan.nextLine();
+
+            while (!(dateOfBirth.matches(DATE_REGEX)))
+            {
+                System.out.println("Invalid entry, please enter date of birth again (yyyy-mm-dd): ");
+                dateOfBirth = scan.nextLine();
+            }
+            System.out.println("DOB: " + dateOfBirth);
+
+//          String dateOfBirth = "1994-10-29";
 
             System.out.println("Enter Password: ");
-//        String password = scan.nextLine();
-            String password = "c@rROTsS";
+            String password = scan.nextLine();
+
+            while (!(password.matches(PASSWORD_REGEX)))
+            {
+                System.out.println("Password must contain uppercase / lowercase / special chars / no white spaces and" +
+                        " at least 8 digits long" +
+                        "  ");
+                password = scan.nextLine();
+            }
+            System.out.println("Password: " + password);
+
+//          String password = "c@rROTsS1";
 
             boolean isValidLoginStudent = courseChoicesManager.validLoginStudent(caoNumber,dateOfBirth,password);
 

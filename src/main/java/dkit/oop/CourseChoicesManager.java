@@ -128,9 +128,6 @@ public class CourseChoicesManager {
 
     public boolean validLoginStudent(int caoNumber, String dateOfBirth, String password)
     {
-        // 1. check caoNumber exists by using is registered method above
-        // 2. create a temp new student
-        // 2. check their dateOfBirth & password matches the temp students
         boolean isValidLoginStudent = false;
 
         if (isRegistered(caoNumber))
@@ -139,9 +136,13 @@ public class CourseChoicesManager {
 
             System.out.println(tempStudent);
 
+            System.out.println("registered");
+
             if(tempStudent.getDayOfBirth().equals(dateOfBirth) && tempStudent.getPassword().equals(password))
             {
                 isValidLoginStudent = true;
+
+                System.out.println("dob and password works");
             }
         }
         return isValidLoginStudent;
