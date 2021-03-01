@@ -1,5 +1,10 @@
 package dkit.oop;
 
+/*
+ * Brian McKenna
+ * SD2B
+ */
+
 // Stores all student CAO choices.
 // Allows student to make course choices, save them and update them later.
 //

@@ -1,4 +1,10 @@
 package dkit.oop;
+
+/*
+ * Brian McKenna
+ * SD2B
+ */
+
 // StudentManager encapsulates the storage and ability
 // to manipulate student objects
 

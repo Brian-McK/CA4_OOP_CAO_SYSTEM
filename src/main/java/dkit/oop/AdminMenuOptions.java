@@ -1,5 +1,10 @@
 package dkit.oop;
 
+/*
+ * Brian McKenna
+ * SD2B
+ */
+
 public enum AdminMenuOptions
 {
     CONTINUE,ADD_COURSE,REMOVE_COURSE,DISPLAY_ALL_COURSES,DISPLAY_COURSE, ADD_STUDENT,REMOVE_STUDENT,DISPLAY_STUDENT,

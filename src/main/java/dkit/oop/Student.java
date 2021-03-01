@@ -37,8 +37,6 @@ public class Student {
         this.email = null;
     }
 
-    //public boolean verifyLoginCredentials( yyy-mm-dd, password);
-
     public int getCaoNumber() {
         return caoNumber;
     }

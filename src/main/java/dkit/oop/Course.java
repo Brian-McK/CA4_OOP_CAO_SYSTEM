@@ -1,5 +1,10 @@
 package dkit.oop;
 
+/*
+ * Brian McKenna
+ * SD2B
+ */
+
 import java.util.Objects;
 
 public class Course {

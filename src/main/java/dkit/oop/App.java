@@ -19,6 +19,7 @@ public class App
 {
     private static final String DATE_REGEX = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$";
     private static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+
     // ^                # start-of-string
     //(?=.*[0-9])       # a digit must occur at least once
     //(?=.*[a-z])       # a lower case letter must occur at least once
@@ -98,7 +99,7 @@ public class App
             }
             System.out.println("Password: " + password);
 
-//          String password = "c@rROTsS1";
+//          String password = "c@rROTsS1!";
 
             boolean isValidLoginStudent = courseChoicesManager.validLoginStudent(caoNumber,dateOfBirth,password);
 
@@ -112,11 +113,10 @@ public class App
                 System.out.println("Try again");
             }
         }
-        else if(userChoice == 2)
+        else
         {
             System.out.println("Welcome admin, Enter details to login:");
 
-            // TODO - VALIDATE
             System.out.println("Enter Username: ");
 //            String username = scan.nextLine();
             String username = "admin";
@@ -178,9 +178,10 @@ public class App
                 {
                     case DISPLAY_COURSE:
                         System.out.println("\nYOU SELECTED ---> 1) Display a course");
+
                         System.out.println("Enter Course ID:");
                         String courseId = scan.nextLine();
-                        //TODO - VALIDATE
+
                         if(courseChoicesManager.getCourseDetails(courseId) != null)
                         {
                             System.out.println(courseChoicesManager.getCourseDetails(courseId));
@@ -191,17 +192,16 @@ public class App
                         break;
                     case DISPLAY_ALL_COURSES:
                         System.out.println("\nYOU SELECTED ---> 2) Display all courses");
-                        //TODO - Make output nicer and sort
                         System.out.println(courseChoicesManager.getAllCourses());
                         break;
                     case DISPLAY_CURRENT_CHOICES:
                         System.out.println("\nYOU SELECTED ---> 3) Display current course choices:");
-                        //TODO - Make output nicer and sort
                         System.out.println(courseChoicesManager.getStudentChoices(student.getCaoNumber()));
                         break;
                     case UPDATE_CHOICES:
                         System.out.println("\nYOU SELECTED ---> 4) Update current course choices:");
                         System.out.println("Current Course Choices: " + courseChoicesManager.getStudentChoices(student.getCaoNumber()));
+
                         System.out.println("Please enter your updated student choices (Max 10 entries): ");
                         List<Course> updatedChoicesList = new ArrayList<>();
 
@@ -214,7 +214,7 @@ public class App
 
                         courseChoicesManager.updateChoice(student.getCaoNumber(),updatedChoicesList);
 
-                        System.out.println("Updated Course Choices: " + courseChoicesManager.getStudentChoices(student.getCaoNumber()));
+                        System.out.println("\nUpdated Course Choices: " + courseChoicesManager.getStudentChoices(student.getCaoNumber()));
                         break;
                     case QUIT:
                         break;
@@ -246,30 +246,52 @@ public class App
                 {
                     case ADD_COURSE:
                         System.out.println("\nYOU SELECTED ---> 1) Add a course");
-                        //TODO - VALIDATE & INPUT
-                        Course course = new Course("DK213","level 8","Sign Language","Dundalk Institute of Technology");
-                        courseManager.addCourse(course);
-                        System.out.println(courseChoicesManager.getAllCourses());
+                        System.out.println("Enter new course Id: ");
+                        String newCourseId = scan.nextLine();
+
+                        // check if the courseId is available ie not in the list
+                        if(courseChoicesManager.getCourseDetails(newCourseId) != null)
+                        {
+                            System.out.println("Invalid, try again");
+                        }
+                        else {
+                            System.out.println("Enter the level: ");
+                            String level = scan.nextLine();
+
+                            System.out.println("Enter the title: ");
+                            String title = scan.nextLine();
+
+                            System.out.println("Enter the institution: ");
+                            String institution = scan.nextLine();
+
+                            Course newCourse = new Course(newCourseId,level,title,institution);
+                            courseManager.addCourse(newCourse);
+                            System.out.println(courseChoicesManager.getAllCourses());
+                        }
                         break;
                     case REMOVE_COURSE:
                         System.out.println("\nYOU SELECTED ---> 2) Remove a course");
                         System.out.println("Enter course id to remove: ");
                         String courseIdRemove = scan.nextLine();
-                        // check if it exists
-                        courseManager.removeCourse(courseIdRemove);
-                        System.out.println("Removed course: " + courseIdRemove);
 
+                        if(courseChoicesManager.getCourseDetails(courseIdRemove) == null)
+                        {
+                            System.out.println("Invalid, try again");
+                        }
+                        else {
+                            courseManager.removeCourse(courseIdRemove);
+                            System.out.println("Removed course: " + courseIdRemove);
+                            System.out.println(courseChoicesManager.getAllCourses());
+                        }
                         break;
                     case DISPLAY_ALL_COURSES:
                         System.out.println("\nYOU SELECTED ---> 3) Display all courses");
-                        //TODO - Make output nicer and sort
                         System.out.println(courseChoicesManager.getAllCourses());
                         break;
                     case DISPLAY_COURSE:
                         System.out.println("\nYOU SELECTED ---> 4) Display a course");
                         System.out.println("Enter Course ID:");
                         String courseIdDisplay = scan.nextLine();
-                        //TODO - VALIDATE
                         if(courseChoicesManager.getCourseDetails(courseIdDisplay) != null)
                         {
                             System.out.println(courseChoicesManager.getCourseDetails(courseIdDisplay));
@@ -280,10 +302,30 @@ public class App
                         break;
                     case ADD_STUDENT:
                         System.out.println("\nYOU SELECTED ---> 5) Add a student");
-                        //TODO - VALIDATE & INPUT
-                        Student student = new Student(12345,"1989-02-28","biscuits","biscuitLover@gmail.com");
-                        studentManager.addStudent(student);
-                        System.out.println(studentManager.getStudent(student.getCaoNumber()));
+
+                        System.out.println("Enter new student cao number: ");
+                        int newStudentCao = scan.nextInt();
+                        scan.nextLine();
+
+                        if(courseChoicesManager.getStudentDetails(newStudentCao) != null)
+                        {
+                            System.out.println("Invalid, try again");
+                        }
+                        else {
+                            System.out.println("Enter the date of birth: ");
+                            String dob = scan.nextLine();
+
+                            System.out.println("Enter the password: ");
+                            String password = scan.nextLine();
+
+                            System.out.println("Enter the email: ");
+                            String email = scan.nextLine();
+
+                            Student newStudent = new Student(newStudentCao,dob,password,email);
+                            studentManager.addStudent(newStudent);
+                            System.out.println(studentManager.getStudent(newStudent.getCaoNumber()));
+                        }
+
                         break;
                     case REMOVE_STUDENT:
                         System.out.println("\nYOU SELECTED ---> 6) Remove a student");
@@ -299,7 +341,6 @@ public class App
                         System.out.println("Enter student CAO number:");
                         int studentCaoNumber = scan.nextInt();
                         scan.nextLine();
-                        //TODO - VALIDATE
                         if(studentManager.getStudent(studentCaoNumber) != null)
                         {
                             System.out.println(studentManager.getStudent(studentCaoNumber));
